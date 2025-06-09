@@ -1,0 +1,147 @@
+.cursor-dot,
+.cursor-outline {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  transition: opacity 0.15s ease-in-out, transform 0.25s ease-in-out;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--secondary);
+  z-index: 10000;
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--secondary);
+  opacity: 0.5;
+  transition: 
+    transform 0.2s ease-out,
+    width 0.2s ease-out, 
+    height 0.2s ease-out,
+    opacity 0.2s ease-out,
+    background-color 0.2s ease-out;
+}
+
+/* Spotlight effect */
+.cursor-spotlight {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100, 255, 218, 0.15) 0%, rgba(100, 255, 218, 0.05) 40%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 9996;
+  opacity: 0;
+  transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1), height 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cursor-spotlight.animate {
+  animation: spotlightFade 2s ease-out;
+}
+
+.cursor-spotlight.clicked {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(100, 255, 218, 0.2) 0%, rgba(100, 255, 218, 0.08) 35%, transparent 70%);
+  animation: spotlightPulse 0.8s ease-out;
+}
+
+/* Trail effect */
+.cursor-trail {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgba(100, 255, 218, 0.1);
+  transform: translate(-50%, -50%);
+  z-index: 9997;
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Different sizes for each trail dot */
+.trail-0 { width: 18px; height: 18px; background-color: rgba(100, 255, 218, 0.3); }
+.trail-1 { width: 24px; height: 24px; background-color: rgba(100, 255, 218, 0.25); }
+.trail-2 { width: 30px; height: 30px; background-color: rgba(100, 255, 218, 0.2); }
+.trail-3 { width: 35px; height: 35px; background-color: rgba(100, 255, 218, 0.15); }
+.trail-4 { width: 40px; height: 40px; background-color: rgba(100, 255, 218, 0.1); }
+.trail-5 { width: 44px; height: 44px; background-color: rgba(100, 255, 218, 0.08); }
+.trail-6 { width: 48px; height: 48px; background-color: rgba(100, 255, 218, 0.06); }
+.trail-7 { width: 52px; height: 52px; background-color: rgba(100, 255, 218, 0.04); }
+
+.cursor-dot.hidden,
+.cursor-outline.hidden {
+  opacity: 0;
+}
+
+.cursor-dot.clicked {
+  transform: translate(-50%, -50%) scale(1.5);
+  background-color: var(--secondary);
+}
+
+.cursor-outline.clicked {
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0.2;
+}
+
+.cursor-outline.hovered {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(100, 255, 218, 0.1);
+  border-width: 1px;
+}
+
+@keyframes spotlightFade {
+  0% {
+    opacity: 0.8;
+    width: 280px;
+    height: 280px;
+  }
+  100% {
+    opacity: 0;
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@keyframes spotlightPulse {
+  0% {
+    opacity: 0.8;
+    width: 150px;
+    height: 150px;
+  }
+  50% {
+    opacity: 0.6;
+    width: 500px;
+    height: 500px;
+  }
+  100% {
+    opacity: 0;
+    width: 600px;
+    height: 600px;
+  }
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+  .cursor-dot,
+  .cursor-outline,
+  .cursor-spotlight,
+  .cursor-trail {
+    display: none;
+  }
+}
